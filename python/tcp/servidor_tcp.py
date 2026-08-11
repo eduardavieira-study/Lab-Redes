@@ -1,4 +1,5 @@
 import socket
+from datetime import datetime
 
 HOST = "0.0.0.0"
 PORTA = 5074
@@ -20,6 +21,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
             if dados.lower() == "sair":
                 conexao.sendall("Encerrando conexão. Até mais!\n".encode("utf-8"))
                 break
+            if dados.lower() == "hora":
+                horario_atual = datetime.now().strftime("%H:%M:%S")
+                conexao.sendall(
+                    f"Horário atual do servidor: {horario_atual}\n".encode("utf-8")
+                )
+                continue
             resposta = f'Monitor responde: recebi sua mensagem -> "{dados}"\n'
             conexao.sendall(resposta.encode("utf-8"))
 

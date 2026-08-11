@@ -316,8 +316,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
 
 ```powershell
 cd python/tcp
-python servidor_tcp.py     # em um terminal
-python cliente_tcp.py      # em outro terminal
+python3 servidor_tcp.py     # em um terminal
+python3 cliente_tcp.py      # em outro terminal
 ```
 
 ### 4.5 Tarefa
