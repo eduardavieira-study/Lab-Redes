@@ -71,3 +71,26 @@ Portanto, quando o cliente voltar, ele poderá receber as próximas mensagens en
 
 ---
 
+## 7.6 Perguntas — Parte D (WebSocket)
+
+### 1. O WebSocket começa com uma requisição HTTP contendo o cabeçalho `Upgrade: websocket`. O que exatamente "muda" na conexão depois que esse handshake é concluído?
+
+Após o handshake, a conexão deixa de funcionar como uma comunicação HTTP tradicional e passa a utilizar o protocolo WebSocket. A conexão TCP que já foi estabelecida continua aberta, mas agora pode ser utilizada para uma comunicação contínua e bidirecional entre cliente e servidor.
+
+Dessa forma, tanto o cliente quanto o servidor podem enviar mensagens a qualquer momento, sem a necessidade de realizar uma nova requisição HTTP para cada mensagem. Isso permite uma comunicação mais adequada para aplicações que precisam de atualizações em tempo real.
+
+### 2. Compare o mural via WebSocket (Parte D) com o aviso via Multicast (Parte C). Ambos entregam uma mensagem a vários destinatários — qual a diferença na forma como cada um descobre e alcança os destinatários?
+
+No **Multicast**, os destinatários são definidos por meio de um grupo multicast. Os clientes que desejam receber as mensagens entram nesse grupo e o servidor envia os dados para o endereço do grupo, sem precisar conhecer individualmente cada cliente.
+
+No **WebSocket**, os clientes estabelecem uma conexão diretamente com o servidor. O servidor mantém as conexões abertas e pode armazenar os clientes conectados para enviar uma nova mensagem para cada um deles.
+
+Assim, enquanto o Multicast utiliza um endereço de grupo para alcançar vários destinatários, o WebSocket utiliza conexões individuais entre o servidor e cada cliente conectado.
+
+### 3. Por que o WebSocket é mais adequado do que TCP "cru" (como o da Parte A) para este cenário de mural em tempo real, mesmo os dois sendo, no fundo, conexões TCP contínuas?
+
+Apesar de ambos utilizarem uma conexão TCP contínua, o WebSocket já fornece uma estrutura própria para comunicação entre aplicações. Ele permite que cliente e servidor troquem mensagens de forma bidirecional, sem precisar criar manualmente um protocolo de comunicação sobre o TCP.
+
+No TCP "cru" da Parte A, seria necessário definir como as mensagens seriam identificadas, enviadas e interpretadas pela aplicação. Já o WebSocket possui mecanismos próprios para organizar essa comunicação e é suportado diretamente por aplicações web.
+
+Por isso, para um mural em tempo real, o WebSocket facilita a implementação da comunicação contínua entre vários clientes e o servidor, permitindo que novas mensagens sejam distribuídas aos clientes conectados de forma mais prática.
