@@ -631,8 +631,8 @@ while True:
 
 ```powershell
 cd python/multicast
-python cliente_multicast.py     # em um ou mais terminais, primeiro
-python servidor_multicast.py    # depois, em outro terminal
+python3 cliente_multicast.py     # em um ou mais terminais, primeiro
+python3 servidor_multicast.py    # depois, em outro terminal
 ```
 
 ### 6.5 Solução de problemas: "meu cliente não recebe nada"
