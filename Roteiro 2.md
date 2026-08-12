@@ -891,8 +891,8 @@ asyncio.run(main())
 ```powershell
 cd python/websocket
 pip install websockets
-python mural_servidor.py     # em um terminal
-python mural_cliente.py      # em outro(s) terminal(is)
+python3 mural_servidor.py     # em um terminal
+python3 mural_cliente.py      # em outro(s) terminal(is)
 ```
 
 ### 7.5 Tarefa
