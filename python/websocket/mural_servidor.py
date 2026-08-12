@@ -18,8 +18,8 @@ async def tratar_conexao(websocket):
 
 async def main():
     # Rodando em máquina compartilhada com colegas? Some seu OFFSET (seção 3.3): 8888 + OFFSET
-    print("[WebSocket] Servidor do mural iniciado na porta 8888.")
-    async with websockets.serve(tratar_conexao, "0.0.0.0", 8888):
+    print("[WebSocket] Servidor do mural iniciado na porta 8962.")
+    async with websockets.serve(tratar_conexao, "0.0.0.0", 8962):
         await asyncio.Future()  # mantém o servidor rodando indefinidamente
 
 asyncio.run(main())

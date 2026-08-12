@@ -68,3 +68,6 @@ Não. Se um cliente estiver offline no momento em que uma mensagem for enviada, 
 Isso acontece porque o Multicast utilizado realiza a comunicação por meio de datagramas UDP, enviando as mensagens para o grupo naquele momento. Os clientes precisam estar inscritos no grupo e disponíveis para receber os pacotes quando eles forem enviados. Como não existe, nessa implementação, um mecanismo para armazenar as mensagens enviadas, os avisos perdidos não são recuperados posteriormente.
 
 Portanto, quando o cliente voltar, ele poderá receber as próximas mensagens enviadas para o grupo, mas não receberá as mensagens que foram enviadas enquanto estava offline.
+
+---
+

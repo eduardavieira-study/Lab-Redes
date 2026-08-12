@@ -7,7 +7,7 @@ async def escutar(websocket):
         print("> ", end="", flush=True)
 
 async def main():
-    uri = "ws://localhost:8888"
+    uri = "ws://localhost:8962"
     async with websockets.connect(uri) as websocket:
         print("[WebSocket] Conectado ao mural. Digite 'sair' para encerrar.")
         tarefa_escuta = asyncio.create_task(escutar(websocket))
