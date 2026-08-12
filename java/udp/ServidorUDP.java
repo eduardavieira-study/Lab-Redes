@@ -1,4 +1,3 @@
-package java.udp;
 import java.net.*;
 
 public class ServidorUDP {

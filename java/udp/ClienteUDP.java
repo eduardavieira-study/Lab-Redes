@@ -1,4 +1,3 @@
-package java.udp;
 import java.net.*;
 import java.util.Scanner;
 

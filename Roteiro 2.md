@@ -466,8 +466,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cliente:
 
 ```powershell
 cd python/udp
-python servidor_udp.py     # em um terminal
-python cliente_udp.py      # em outro terminal
+python3 servidor_udp.py     # em um terminal
+python3 cliente_udp.py      # em outro terminal
 ```
 
 ### 5.5 Tarefa
