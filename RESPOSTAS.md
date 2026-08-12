@@ -42,3 +42,29 @@ Outro exemplo é o **streaming de áudio e vídeo em tempo real**. Pequenas perd
 Sim. Seria possível implementar um controle dos clientes no servidor, armazenando informações como endereço IP e porta de cada cliente que enviar uma mensagem.
 
 Nesse caso, o servidor precisaria manter uma estrutura para armazenar esses clientes e atualizar essa lista conforme novas mensagens fossem recebidas. Porém, isso não transformaria o UDP em um protocolo orientado à conexão. O controle seria feito pela própria aplicação, já que o UDP continua não estabelecendo uma conexão entre cliente e servidor.
+
+---
+
+## 6.7 Perguntas — Parte C (Multicast)
+
+Durante os testes de Multicast, foi necessário realizar algumas alterações nos códigos para que a comunicação funcionasse tanto na implementação em Java quanto em Python. Inicialmente, foram utilizadas as implementações fornecidas, porém o macOS apresentou problemas no envio de pacotes multicast, mesmo após diferentes tentativas de configuração e testes de rede. Após os ajustes necessários nos sockets, foi possível realizar a comunicação e validar o funcionamento do Multicast.
+
+### 1. Qual é a diferença fundamental entre enviar a mesma mensagem para 3 clientes usando **unicast repetido 3 vezes** e enviar **uma única vez** via multicast? Pense em termos de tráfego de rede.
+
+No **unicast**, o servidor precisa enviar a mesma mensagem individualmente para cada cliente. Dessa forma, para três clientes, a mesma mensagem será transmitida três vezes, gerando um maior tráfego de dados na rede.
+
+No **multicast**, o servidor envia a mensagem uma única vez para o endereço do grupo multicast. Os clientes que estiverem inscritos nesse grupo recebem a mensagem. Dessa forma, o multicast pode reduzir o tráfego da rede quando vários clientes precisam receber a mesma informação.
+
+### 2. O que é o **TTL** (time-to-live) configurado no socket multicast e por que ele é importante para controlar o alcance dos pacotes na rede?
+
+O **TTL (Time To Live)** define o alcance que um pacote multicast pode ter na rede, limitando a quantidade de saltos que ele pode realizar entre dispositivos de rede.
+
+No código utilizado, o TTL foi configurado com o valor `2`. Isso limita o alcance dos pacotes, evitando que os avisos sejam propagados por uma quantidade muito grande de redes. Dessa forma, o TTL ajuda a controlar o alcance da comunicação multicast e evita que os pacotes sejam enviados para redes que não deveriam recebê-los.
+
+### 3. Se um dos clientes ficar temporariamente offline e voltar depois, ele recebe os avisos que perdeu? Por quê? Relacione com a arquitetura de comunicação em grupo.
+
+Não. Se um cliente estiver offline no momento em que uma mensagem for enviada, ele não receberá essa mensagem quando voltar.
+
+Isso acontece porque o Multicast utilizado realiza a comunicação por meio de datagramas UDP, enviando as mensagens para o grupo naquele momento. Os clientes precisam estar inscritos no grupo e disponíveis para receber os pacotes quando eles forem enviados. Como não existe, nessa implementação, um mecanismo para armazenar as mensagens enviadas, os avisos perdidos não são recuperados posteriormente.
+
+Portanto, quando o cliente voltar, ele poderá receber as próximas mensagens enviadas para o grupo, mas não receberá as mensagens que foram enviadas enquanto estava offline.
