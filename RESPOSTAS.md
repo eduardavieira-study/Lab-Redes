@@ -23,3 +23,22 @@ Durante os testes, também foi possível perceber que a comunicação entre Java
 
 ---
 
+## 5.6 Perguntas — Parte B (UDP)
+
+### 1. No passo 2 da tarefa, o que aconteceu quando você enviou uma mensagem com o servidor desligado? Compare com o que aconteceria em TCP e explique a diferença observada, relacionando com o conceito de "sem conexão".
+
+Quando o servidor UDP estava desligado, o cliente conseguiu enviar a mensagem mesmo sem existir uma conexão estabelecida com o servidor. Porém, como não havia nenhum servidor para receber e responder ao datagrama, o cliente ficou aguardando uma resposta.
+
+A diferença para o TCP está justamente no estabelecimento da conexão. No TCP, o cliente tenta estabelecer uma conexão antes de enviar os dados e, se o servidor estiver desligado, a tentativa de conexão falha. Já no UDP não existe essa etapa de conexão, então o cliente simplesmente envia o datagrama para o endereço e a porta informados, sem ter a garantia de que ele será recebido.
+
+### 2. Cite dois exemplos de aplicações reais que usam UDP e explique, para cada uma, por que a confiabilidade do TCP não é essencial (ou até atrapalharia).
+
+Um exemplo são os **jogos online**, que precisam receber informações rapidamente sobre a posição dos jogadores e outras ações. Nesse caso, a velocidade é mais importante do que garantir a entrega de cada pacote, pois uma informação atrasada pode deixar de ser útil.
+
+Outro exemplo é o **streaming de áudio e vídeo em tempo real**. Pequenas perdas de dados podem ser menos prejudiciais do que atrasos causados pela retransmissão de pacotes. Por isso, o UDP pode ser utilizado quando é mais importante manter a transmissão acontecendo em tempo real.
+
+### 3. No código, o servidor UDP não mantém nenhum registro de "quem está conectado". Isso seria possível de implementar? O que mudaria na arquitetura da aplicação?
+
+Sim. Seria possível implementar um controle dos clientes no servidor, armazenando informações como endereço IP e porta de cada cliente que enviar uma mensagem.
+
+Nesse caso, o servidor precisaria manter uma estrutura para armazenar esses clientes e atualizar essa lista conforme novas mensagens fossem recebidas. Porém, isso não transformaria o UDP em um protocolo orientado à conexão. O controle seria feito pela própria aplicação, já que o UDP continua não estabelecendo uma conexão entre cliente e servidor.
